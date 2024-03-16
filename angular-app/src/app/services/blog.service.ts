@@ -1,4 +1,4 @@
-import { Injectable } from '@angular/core';
+import { Injectable, Inject, PLATFORM_ID } from '@angular/core';
 import { Apollo } from 'apollo-angular';
 import { map, Observable } from 'rxjs';
 import {
@@ -11,6 +11,7 @@ import {
 } from '../graphql.operations';
 import { Author, Post, PostsPageInfo, SeriesList } from '../models/post';
 import { BlogInfo,  } from '../models/blog-info';
+import { DOCUMENT, isPlatformBrowser } from "@angular/common";
 
 @Injectable({
   providedIn: 'root'
@@ -20,16 +21,28 @@ export class BlogService {
   private readonly localStorageKey = 'userBlogURL';
   defaultOgImageUrl = "/assets/images/angular-anguhashblog-dark.jpg";
 
-  constructor(private apollo: Apollo) { }
+	constructor(
+		private apollo: Apollo,
+		@Inject(PLATFORM_ID) private platformId: Object,
+    @Inject(DOCUMENT) private document: Document
+	) {}
 
-  getBlogURL(): string {
-    return localStorage.getItem(this.localStorageKey) || 'hashnode.anguhashblog.com';
-  }
+	getBlogURL(): string {
+		if (isPlatformBrowser(this.platformId)) {
+			return (
+				localStorage.getItem(this.localStorageKey) ||
+				"hashnode.anguhashblog.com"
+			);
+		}
+		return "hashnode.anguhashblog.com";
+	}
 
-  setBlogURL(newBlogURL: string): void {
-    localStorage.setItem(this.localStorageKey, newBlogURL);
-    this.blogURL = newBlogURL;
-  }
+	setBlogURL(newBlogURL: string): void {
+		if (isPlatformBrowser(this.platformId)) {
+			localStorage.setItem(this.localStorageKey, newBlogURL);
+		}
+		this.blogURL = newBlogURL;
+	}
 
   resetBlogURL(): void {
     localStorage.removeItem(this.localStorageKey);
@@ -121,8 +134,8 @@ export class BlogService {
   }
 
   updateOgImageMetaTag(imageUrl: string): void {
-    const metaTag = document.querySelector('meta[property="og:image"]');
-    const metaTagSecure = document.querySelector('meta[property="og:image:secure_url"]');
+    const metaTag = this.document.querySelector('meta[property="og:image"]');
+    const metaTagSecure = this.document.querySelector('meta[property="og:image:secure_url"]');
     if (metaTag) {
       metaTag.setAttribute('content', imageUrl);
     }
