@@ -7,6 +7,7 @@ import { ThemeService } from "./services/theme.service";
 import { BlogInfo } from "./models/blog-info";
 import { Subscription } from "rxjs";
 import { BlogService } from "./services/blog.service";
+import { Title, Meta } from "@angular/platform-browser";
 
 @Component({
 	selector: "app-root",
@@ -16,19 +17,25 @@ import { BlogService } from "./services/blog.service";
 	styleUrl: "./app.component.scss",
 })
 export class AppComponent implements OnInit, OnDestroy {
-	title = "angular-app";
-  blogURL!: string;
+	// title = "angular-app";
+	blogURL!: string;
 	blogInfo!: BlogInfo;
 	siteFavicon: any;
+	postSlug!: string;
+	isBlogPostUrl: boolean = false;
 	themeService: ThemeService = inject(ThemeService);
 	blogService: BlogService = inject(BlogService);
+	private title: Title = inject(Title);
+	private meta: Meta = inject(Meta);
 	private querySubscription?: Subscription;
 
-  constructor(@Inject(DOCUMENT) private document: Document) {}
+	constructor(@Inject(DOCUMENT) private document: Document) {}
 
 	ngOnInit(): void {
-    this.blogURL = this.blogService.getBlogURL();
-    this.siteFavicon = this.document.querySelector('link[rel="icon"]') as HTMLLinkElement;
+		this.blogURL = this.blogService.getBlogURL();
+		this.siteFavicon = this.document.querySelector(
+			'link[rel="icon"]'
+		) as HTMLLinkElement;
 		this.querySubscription = this.blogService
 			.getBlogInfo(this.blogURL)
 			.subscribe((data) => {
@@ -49,6 +56,7 @@ export class AppComponent implements OnInit, OnDestroy {
 				}
 			});
 	}
+
 	ngOnDestroy(): void {
 		this.querySubscription?.unsubscribe();
 	}

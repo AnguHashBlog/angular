@@ -47,7 +47,33 @@ export const GET_AUTHOR_INFO = gql`
 	}
 `;
 
-export const GET_POSTS = gql`
+export const GET_FIRST_TEN_POSTS = gql`
+	query Publication($host: String!) {
+		publication(host: $host) {
+			id
+			isTeam
+			title
+			posts(first: 10) {
+				edges {
+					node {
+						id
+						slug
+						coverImage {
+							url
+						}
+						title
+						brief
+						content {
+							html
+						}
+					}
+				}
+			}
+		}
+	}
+`;
+
+export const GET_POSTS_WITH_PAGINATION = gql`
 	query Publication($host: String!, $after: String!) {
 		publication(host: $host) {
 			id

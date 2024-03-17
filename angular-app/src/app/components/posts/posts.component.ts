@@ -26,7 +26,7 @@ export class PostsComponent implements OnInit {
   }
 
   private loadPosts(): void {
-    this.blogService.getPosts(this.blogURL, this.paginationInfo.endCursor).subscribe(postsPageInfo => {
+    this.blogService.getPostsWithPagination(this.blogURL, this.paginationInfo.endCursor).subscribe(postsPageInfo => {
       this.paginationInfo = postsPageInfo.pagination;
       this.isHiddenLoadMore = !postsPageInfo.pagination.hasNextPage;
       this.posts = postsPageInfo.posts;
@@ -36,7 +36,7 @@ export class PostsComponent implements OnInit {
   loadMorePosts(): void {
     if (!this.paginationInfo.hasNextPage) return;
     this.isHiddenLoadMore = true;
-    this.blogService.getPosts(this.blogURL, this.paginationInfo.endCursor).pipe(
+    this.blogService.getPostsWithPagination(this.blogURL, this.paginationInfo.endCursor).pipe(
     ).subscribe(newPosts => {
       this.isActiveInfiniteScroll = true;
       this.paginationInfo = newPosts.pagination;
