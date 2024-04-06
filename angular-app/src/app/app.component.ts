@@ -1,5 +1,5 @@
-import { Component, Inject, OnDestroy, OnInit, inject } from "@angular/core";
-import { CommonModule, DOCUMENT } from "@angular/common";
+import { Component, Inject, OnDestroy, OnInit, inject,HostListener } from "@angular/core";
+import { CommonModule, DOCUMENT,ViewportScroller } from "@angular/common";
 import { HeaderComponent } from "./components/header/header.component";
 import { FooterComponent } from "./components/footer/footer.component";
 import { RouterOutlet } from "@angular/router";
@@ -25,7 +25,8 @@ export class AppComponent implements OnInit, OnDestroy {
 	blogService: BlogService = inject(BlogService);
   private meta: Meta = inject(Meta);
 	private querySubscription?: Subscription;
-
+	showScrollButton: boolean = false;
+	private readonly scroller = inject(ViewportScroller);
   constructor(@Inject(DOCUMENT) private document: Document) {}
 
 	ngOnInit(): void {
@@ -58,7 +59,19 @@ export class AppComponent implements OnInit, OnDestroy {
       ]);
 	}
 
+	@HostListener('window:scroll', [])
+	onWindowScroll() {
+		const yOffset = window.pageYOffset || document.documentElement.scrollTop;
+		if (yOffset > 300) { 
+			this.showScrollButton = true;
+		} else {
+			this.showScrollButton = false;
+		}
+	}
 
+	scrollToTop() {
+		this.scroller.scrollToPosition([0, 0]);
+	}
 
 	ngOnDestroy(): void {
 		this.querySubscription?.unsubscribe();
