@@ -3,7 +3,7 @@ import { BlogService } from '../../services/blog.service';
 import { AsyncPipe, DatePipe } from '@angular/common';
 import { SanitizerHtmlPipe } from '../../pipes/sanitizer-html.pipe';
 import { Post } from '../../models/post';
-import { Observable, Subscription } from 'rxjs';
+import {Observable, Subscription, tap} from 'rxjs';
 import { ClipboardCopyButtonDirective } from '../../directives/clipboard-copy-button.directive';
 import { ThemeService } from '../../services/theme.service';
 import { BlogInfo } from '../../models/blog-info';
@@ -44,10 +44,12 @@ export class PostDetailsComponent implements OnInit, OnDestroy {
 				this.blogInfo = data;
 				this.blogName = this.blogInfo.title;
 			});
-		this.post$ = this.blogService.getSinglePost(this.blogURL, this.postSlug);
-
-    this.meta.updateTag({ name: 'description', content: 'This is a blog post' });
-    this.meta.updateTag({ name: 'image', content: '/assets/anguhashblog-logo-purple-bgr.jpg' });
+		this.post$ = this.blogService.getSinglePost(this.blogURL, this.postSlug).pipe(
+      tap((post:Post)=>{
+        this.meta.updateTag({ name: 'description', content: post.title });
+        this.meta.updateTag({ name: 'image', content: post.coverImage.url });
+      })
+    );
 	}
 
 	toggleTheme(): void {
