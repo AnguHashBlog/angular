@@ -82,6 +82,9 @@
 @if (modalService.showFollowDialog) {
 <app-follow-dialog></app-follow-dialog>
 }
+@if (modalService.showAuthorsDialog) {
+  <app-authors-dialog></app-authors-dialog>
+}
 
 @if (!showMainHeader) {
 <app-sidenav [sidenavOpen]="sidenavOpen" [class.show]="sidenavOpen"></app-sidenav>

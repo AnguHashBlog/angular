@@ -9,6 +9,7 @@ import { ThemeService } from '../../services/theme.service';
 import { BlogInfo } from '../../models/blog-info';
 import { YoutubeVideoEmbedDirective } from '../../directives/youtube-video-embed.directive';
 import { Meta } from '@angular/platform-browser';
+import {ModalService} from "../../services/modal.service";
 
 @Component({
 	selector: "app-post-details",
@@ -30,6 +31,7 @@ export class PostDetailsComponent implements OnInit, OnDestroy {
 	post$!: Observable<Post>;
   postCoverImage!: string;
 	themeService: ThemeService = inject(ThemeService);
+  private modalService: ModalService = inject(ModalService);
 	private blogService = inject(BlogService);
   private meta: Meta = inject(Meta);
 	private querySubscription?: Subscription;
@@ -59,4 +61,9 @@ export class PostDetailsComponent implements OnInit, OnDestroy {
     this.meta.updateTag({ name: 'description', content: 'Angular Template for Hashnode Blogs' });
     this.meta.updateTag({ name: 'image', content: '/assets/angular-anguhashblog-dark.jpg' });
 	}
+
+  showAuthors(post:Post) {
+    this.blogService.currentPost.set(post);
+    this.modalService.showAuthorsDialog=true;
+  }
 }

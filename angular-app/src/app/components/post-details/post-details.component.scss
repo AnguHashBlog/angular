@@ -41,7 +41,12 @@
             font-size: 1.1rem;
             font-weight: 500;
           }
-
+          .multiple-authors-name{
+            cursor: pointer;
+          }
+          .multiple-authors-name:hover{
+            text-decoration: underline;
+          }
           .post-meta {
             display: flex;
             align-items: center;

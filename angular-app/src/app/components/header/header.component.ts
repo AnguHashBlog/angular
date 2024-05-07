@@ -19,6 +19,7 @@ import { SvgIconComponent } from "../../partials/svg-icon/svg-icon.component";
 import { SettingsDialogComponent } from "../../partials/settings-dialog/settings-dialog.component";
 import { ShareDialogComponent } from "../../partials/share-dialog/share-dialog.component";
 import { ThemeSwitcherComponent } from "../../partials/theme-switcher/theme-switcher.component";
+import {AuthorsDialogComponent} from "../post-details/authors-dialog/authors-dialog.component";
 
 @Component({
 	selector: "app-header",
@@ -33,6 +34,7 @@ import { ThemeSwitcherComponent } from "../../partials/theme-switcher/theme-swit
 		SvgIconComponent,
 		SettingsDialogComponent,
 		ShareDialogComponent,
+    AuthorsDialogComponent,
 	],
 	templateUrl: "./header.component.html",
 	styleUrl: "./header.component.scss",

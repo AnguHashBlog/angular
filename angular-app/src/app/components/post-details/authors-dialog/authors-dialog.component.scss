@@ -1,0 +1,81 @@
+.overlay {
+  position: fixed;
+  top: 0;
+  right: 0;
+  width: 100%;
+  height: 100%;
+  background-color: #00000056;
+  z-index: 4;
+}
+
+.dialog-container {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  width: 26vw;
+  height: 33vh;
+  margin: auto;
+  padding: 0 0.8rem;
+  border-radius: 0.3rem;
+  z-index: 10;
+
+  .close {
+    display: flex;
+    align-items: center;
+    justify-content: flex-end;
+    width: 100%;
+
+    .close-btn {
+      cursor: pointer;
+    }
+  }
+
+  .dialog-content {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    padding: 0 2rem;
+
+    h3 {
+      margin: 0.5rem 0;
+    }
+
+    input {
+      font-size: 1rem;
+      min-width: 16;
+      padding: 0.5rem 0.2rem;
+      margin: 1rem 0 0.5rem;
+      border-radius: 0.3rem;
+    }
+
+
+    .dialog-content-wrapper {
+      text-align: center;
+      .author-info {
+        display: flex;
+        align-items: center;
+        .author-image {
+          border-radius: 50%;
+          width: 3rem;
+        }
+        .author-text {
+          display: flex;
+          flex-direction: column;
+          margin-left: 0.6rem;
+
+          .author-name {
+            font-size: 1.1rem;
+            font-weight: 500;
+          }
+        }
+      }
+    }
+  }
+}

@@ -7,4 +7,5 @@ export class ModalService {
   showSettingsDialog = false;
   showShareDialog = false;
   showFollowDialog = false;
+  showAuthorsDialog = true;
 }

@@ -1,4 +1,4 @@
-import { Injectable } from '@angular/core';
+import {Injectable, signal} from '@angular/core';
 import { Apollo } from 'apollo-angular';
 import { map, Observable } from 'rxjs';
 import {
@@ -19,6 +19,7 @@ export class BlogService {
   blogURL: string = "hashnode.anguhashblog.com";
   private readonly localStorageKey = 'userBlogURL';
   defaultOgImageUrl = "/assets/images/angular-anguhashblog-dark.jpg";
+  currentPost = signal<Post | null>(null);
 
   constructor(private apollo: Apollo) { }
 

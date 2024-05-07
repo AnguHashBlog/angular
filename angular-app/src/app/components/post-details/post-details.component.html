@@ -11,7 +11,7 @@
             <img class="coauthor-image" [src]="coAuthor.profilePicture" alt="{{coAuthor.name}}">
           }
           <div class="author-text">
-            <span class="author-name">
+            <span class="author-name" [class.multiple-authors-name]="post.coAuthors.length" (click)="post.coAuthors.length? showAuthors(post):null">
               {{ post.author.name }}
               @if (post.coAuthors.length) {
                 with

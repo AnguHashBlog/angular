@@ -1,0 +1,37 @@
+@if (currentPost()) {
+  <div class="overlay" (click)="modalService.showAuthorsDialog=false"></div>
+  <div class="dialog-container">
+    <div class="close">
+      <span class="material-symbols-outlined close-btn"
+            (click)="modalService.showAuthorsDialog=false">
+        close
+        </span>
+    </div>
+
+    <div class="dialog-content">
+      <div class="dialog-content-wrapper">
+        <h3>Authors in this article:</h3>
+        <div class="author-info">
+          <img class="author-image" [src]="currentPost()?.author?.profilePicture"
+               alt="{{currentPost()?.author?.name}}">
+          <div class="author-text">
+              <span class="author-name">
+                {{ currentPost()?.author?.name }}
+              </span>
+          </div>
+        </div>
+        @for (coAuthor of currentPost()?.coAuthors; track coAuthor.id) {
+          <div class="author-info">
+            <img class="author-image" [src]="coAuthor.profilePicture" alt="{{coAuthor.name}}">
+            <div class="author-text">
+              <span class="author-name">
+                {{ coAuthor.name }}
+              </span>
+            </div>
+          </div>
+        }
+      </div>
+    </div>
+  </div>
+}
+
