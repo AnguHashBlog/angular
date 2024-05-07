@@ -1,6 +1,6 @@
 import { Component, Input, OnDestroy, OnInit, inject } from '@angular/core';
 import { BlogService } from '../../services/blog.service';
-import { AsyncPipe, DatePipe } from '@angular/common';
+import {AsyncPipe, DatePipe, ViewportScroller} from '@angular/common';
 import { SanitizerHtmlPipe } from '../../pipes/sanitizer-html.pipe';
 import { Post } from '../../models/post';
 import { Observable, Subscription } from 'rxjs';
@@ -30,6 +30,7 @@ export class PostDetailsComponent implements OnInit, OnDestroy {
 	post$!: Observable<Post>;
   postCoverImage!: string;
 	themeService: ThemeService = inject(ThemeService);
+  private viewportScroller: ViewportScroller  = inject(ViewportScroller);
 	private blogService = inject(BlogService);
   private meta: Meta = inject(Meta);
 	private querySubscription?: Subscription;
@@ -37,6 +38,7 @@ export class PostDetailsComponent implements OnInit, OnDestroy {
 	@Input({ required: true }) postSlug!: string;
 
 	ngOnInit(): void {
+    this.viewportScroller.scrollToPosition([0,0])
 		this.blogURL = this.blogService.getBlogURL();
 		this.querySubscription = this.blogService
 			.getBlogInfo(this.blogURL)
