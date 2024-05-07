@@ -5,6 +5,7 @@ export type Post = {
   readTimeInMinutes: number;
   tags: Tag[];
   author: Author;
+  coAuthors: Author[];
   coverImage: CoverImage;
   content: Content;
   publishedAt: string;

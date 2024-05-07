@@ -7,8 +7,17 @@
       <div class="post-details">
         <div class="author-info">
           <img class="author-image" [src]="post.author.profilePicture" alt="{{post.author.name}}">
+          @for (coAuthor of post.coAuthors; track coAuthor.id) {
+            <img class="coauthor-image" [src]="coAuthor.profilePicture" alt="{{coAuthor.name}}">
+          }
           <div class="author-text">
-            <span class="author-name">{{post.author.name}}</span>
+            <span class="author-name">
+              {{ post.author.name }}
+              @if (post.coAuthors.length) {
+                with
+                {{ post.coAuthors.length }} co-author{{ post.coAuthors.length > 1 ? 's' : '' }}
+              }
+            </span>
             <div class="post-meta">
               <span class="published-date">
                 <span class="material-symbols-outlined">

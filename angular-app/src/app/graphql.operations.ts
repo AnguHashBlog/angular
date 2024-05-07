@@ -140,6 +140,11 @@ export const GET_SINGLE_POST = gql`
 					name
 					profilePicture
 				}
+        coAuthors {
+          id
+          name
+          profilePicture
+        }
 				coverImage {
 					url
 				}

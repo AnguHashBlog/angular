@@ -25,12 +25,13 @@
       .author-info {
         display: flex;
         align-items: center;
-
-        .author-image {
+        .author-image,.coauthor-image {
           border-radius: 50%;
           width: 3rem;
         }
-
+        .coauthor-image{
+          margin-left: -1rem;
+        }
         .author-text {
           display: flex;
           flex-direction: column;
