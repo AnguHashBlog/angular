@@ -29,6 +29,7 @@ export const GET_AUTHOR_INFO = gql`
 		publication(host: $host) {
 			author {
 				id
+        name
 				username
 				profilePicture
 				socialMediaLinks {
@@ -138,6 +139,7 @@ export const GET_SINGLE_POST = gql`
 				author {
 					id
 					name
+          username
 					profilePicture
 				}
 				coverImage {
