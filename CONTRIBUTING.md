@@ -84,7 +84,7 @@ Even if the issue is labeled as not implemented, it remains your responsibility 
 
 Before you submit your Pull Request (PR) consider the following guidelines:
 
-1. Search [AhguHashBlog](https://github.com/AnguHashBlog) for an open or closed PR that relates to your submission.
+1. Search [AnguHashBlog](https://github.com/AnguHashBlog) for an open or closed PR that relates to your submission.
    You don't want to duplicate existing efforts.
 
 2. Be sure that an issue describes the problem you're fixing, or documents the design for the feature you'd like to add.

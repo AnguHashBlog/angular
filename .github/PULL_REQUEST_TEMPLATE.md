@@ -25,6 +25,7 @@ closes #
 
 ## Added to documentation?
 - [ ] 📜 README.md
+- [ ] 📜 CONTRIBUTING.md
 - [ ] 🙅 no documentation needed
 
 ## [Optional] Post-deployment tasks
